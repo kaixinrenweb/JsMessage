@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+		<title>模拟手机短信发送</title>
+		<style>
+			body,
+			p {
+				margin: 0;
+			}
+			input {
+				margin: 0;
+				padding: 0;
+				outline: none;
+				vertical-align: middle;
+			}
+			#wrap {
+				margin: 10px auto;
+				width: 320px;
+				background-color: #66efd7;
+				border: 3px solid #000;
+				border-radius: 20px;
+				padding: 20px;
+				box-sizing: border-box;
+			}
+			#content {
+				box-sizing: border-box;
+				height: 400px;
+				background-color: #fff;
+				overflow-y: auto;
+				padding: 10px;
+			}
+			#massage {
+				height: 50px;
+				background-color: #e3e3e3;
+				text-align: center;
+			}
+			#photo {
+				display: inline-block;
+				vertical-align: top;
+				width: 36px;
+				height: 40px;
+				margin: 5px;
+			}
+			.img {
+				background: url('img/img.png') no-repeat;
+				/* background-color: blue; */
+			}
+			.bgColor {
+				background: url('img/img2.png') no-repeat;
+				/* background-color: red; */
+			}
+			.contentTxt {
+				margin-top: 10px;
+				position: relative;
+			}
+			.left-span {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 36px;
+				height: 40px;
+				background: url('img/img.png') no-repeat;
+			}
+			.right-span {
+				content: "";
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 36px;
+				height: 40px;
+				background: url('img/img2.png') no-repeat;
+			}
+/* 			.contentTxt:nth-of-type(2n) {
+				text-align: left;
+			}
+			.contentTxt:nth-of-type(2n-1) {
+				text-align: right;
+			} */
+			strong {
+				display: inline-block;
+				vertical-align: top;
+				font-weight: normal;
+				font-size: 14px;
+				line-height: 24px;
+				padding: 8px; 
+				border-radius: 5px;
+				word-break: break-all;
+			}
+			.left-txts {
+				background-color: #ccc;
+				margin-left: 45px;
+			}
+			.right-txts {
+				background-color: palevioletred;
+				margin-right: 45px;
+				float: right;
+			}
+/* 			.contentTxt:nth-of-type(2n) strong {
+				background-color: palevioletred;
+				color: #fff;
+			}
+			.contentTxt:nth-of-type(2n-1) strong {
+				background-color: #ccc;
+				color: #000;
+			} */
+			em {
+				position: absolute;
+				top: 15px;
+				width: 0;
+				height: 0;
+				border: 5px solid transparent;
+			}
+		    .left-em {
+		    	left: 35px;
+				border-right-color: #ccc;
+			}
+			.right-em {
+				right: 35px;
+				border-left-color: palevioletred;
+			}
+/* 			.contentTxt:nth-of-type(2n) em {
+				border-right-color: palevioletred;
+			}
+			.contentTxt:nth-of-type(2n-1) em {
+				border-left-color: #ccc;
+			} */
+			#txt {
+				border: none;
+				width: 150px;
+				height: 30px;
+				border-radius: 5px;
+				padding: 4px 10px;
+				box-sizing: border-box;
+				font-size: 14px;
+				line-height: 22px;
+			}
+			#btn {
+				border: none;
+				background-color: transparent;
+				color: #d25a61;
+				font-size: 16px;
+				line-height: 50px;
+				font-family: "微软雅黑";
+				margin-left: 10px;
+			}
+			.clearFix:after {
+				content: "";
+				display: block;
+				clear: both;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="content"></div>
+			<div id="massage">
+				<span id="photo" class="img"></span>
+				<input type="text" id="txt">
+				<input type="button" value="发送" id="btn">
+			</div>
+		</div>
+		<script>
+			var content = document.getElementById("content");
+			var photo = document.getElementById("photo");
+			var txt = document.getElementById("txt");
+			var btn = document.getElementById("btn");
+			
+			photo.onclick = function(){
+				if(photo.className == "img"){
+					photo.className = "bgColor";
+				} else {
+					photo.className = "img";
+				}
+			};
+			btn.onclick = function(){
+				console.log(photo.className);
+				if(txt.value == ""){
+					alert('亲，写点什么吧！');
+				} else {
+					content.innerHTML = '<p class="contentTxt clearFix"><span id="span-ele"></span><em id="em-ele"></em><strong id="strong-ele">' + txt.value + '</strong>' + '</p>' + content.innerHTML ;
+					txt.value = "";
+					var oStrong = document.getElementById("strong-ele");
+					var oEm     = document.getElementById("em-ele");
+					var oSpan   = document.getElementById("span-ele");
+					if(photo.className=="bgColor"){  //红人
+						oStrong.className = "right-txts";
+						oSpan.className = "right-span";
+						oEm.className = "right-em";
+					}else {//蓝人
+						oStrong.className = "left-txts";
+						oSpan.className = "left-span";
+						oEm.className = "left-em";
+					}
+				}
+			};
+			
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
